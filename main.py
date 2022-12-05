@@ -3,6 +3,8 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import pygame
 from pygame.locals import *
+import numpy as np
+import math
 
 def drawCurve(radius, x, y, pos_x, pos_y):
 
@@ -66,6 +68,46 @@ def food(x, y):
 
     glEnd()
 
+def obstacles():
+
+    x_max = 1500
+    y_max = 1000
+    min = 0
+    border = 10
+    glColor3f(0, 0, 0.5)
+    glBegin(GL_QUADS)
+
+    # Boundaries
+    glVertex2f(min, min)
+    glVertex2f(x_max, min)
+    glVertex2f(x_max, border)
+    glVertex2f(min, border)
+
+    glVertex2f(min, min)
+    glVertex2f(min, y_max)
+    glVertex2f(border, y_max)
+    glVertex2f(border, min)
+
+    glVertex2f(min, y_max)
+    glVertex2f(x_max, y_max)
+    glVertex2f(x_max, y_max-border)
+    glVertex2f(min, y_max-border)
+
+    glVertex2f(x_max, y_max)
+    glVertex2f(x_max, min)
+    glVertex2f(x_max-border, min)
+    glVertex2f(x_max-border, y_max)
+
+
+    # Obstacles
+
+    glEnd()
+
+    # glColor3f(1, 0, 0)
+    # glPointSize(10)
+    # glBegin(GL_POINTS)
+    # glVertex2f(x_max-border, min)
+    # glEnd()
 
 def iterate():
     glViewport(0, 0, 1500, 1500)
@@ -94,12 +136,8 @@ def showScreen():
     food_x = 800
     food_y = 500
 
-    drawCurve(radius, 0, 0, x, y)  # main circle
-
     while True:
         for event in pygame.event.get():
-
-            # drawCurve(radius, 0, 0, x, y)  # main circle
 
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -140,8 +178,9 @@ def showScreen():
         # glVertex2f(food_x, food_y)
         # glEnd()
 
-        drawCurve(radius, 0, 0, x, y)
 
+        drawCurve(radius, 0, 0, x, y)
+        obstacles()
 
         if x == food_x and y == food_y:
             print('test')
@@ -151,7 +190,6 @@ def showScreen():
 
         pygame.display.flip()
         pygame.time.wait(10)
-
     # glutSwapBuffers()
 
 showScreen()
