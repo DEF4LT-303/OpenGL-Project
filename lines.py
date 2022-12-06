@@ -1,10 +1,25 @@
 from OpenGL.GL import *
+import numpy as np
 
 
 def draw_points(x, y):
+
+    # first we scale the points
+    sc = 0.2
+    s = np.array([[sc, 0, 0],
+                  [0, sc, 0],
+                  [0, 0, 1]])
+
+    v1 = np.array([[x],
+                  [y],
+                  [1]])
+
+    v11 = np.matmul(s, v1)
+
     glPointSize(3)
     glBegin(GL_POINTS)
-    glVertex2f(x, y)
+    # glVertex2f(x, y)
+    glVertex2f(v11[0][0], v11[1][0])  # print scaled points
     glEnd()
 
 
