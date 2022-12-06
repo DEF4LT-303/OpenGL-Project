@@ -10,11 +10,19 @@ def draw_points(x, y):
                   [0, sc, 0],
                   [0, 0, 1]])
 
+    # then we translate the points
+    ts = 800
+    trasnlate = np.array([[1, 0, ts],
+                          [0, 1, 0],
+                          [0, 0, 1]])
+
+    st = np.matmul(s, trasnlate)  # scale and translate
+
     v1 = np.array([[x],
                   [y],
                   [1]])
 
-    v11 = np.matmul(s, v1)
+    v11 = np.matmul(st, v1)  # scale and translate points
 
     glPointSize(3)
     glBegin(GL_POINTS)

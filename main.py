@@ -27,26 +27,6 @@ def showScreen():
     # glLoadIdentity()
     # iterate()
 
-    # food_x2 = random.randint(15, 680)
-    # food_x2 -= food_x2 % 25
-    # food_y2 = random.randint(15, 430)
-    # food_y2 -= food_y2 % 25
-
-    # food_x3 = random.randint(15, 680)
-    # food_x3 -= food_x3 % 25
-    # food_y3 = random.randint(15, 430)
-    # food_y3 -= food_y3 % 25
-
-    # food_x4 = random.randint(15, 680)
-    # food_x4 -= food_x4 % 25
-    # food_y4 = random.randint(15, 430)
-    # food_y4 -= food_y4 % 25
-
-    # food_x5 = random.randint(15, 680)
-    # food_x5 -= food_x5 % 25
-    # food_y5 = random.randint(15, 430)
-    # food_y5 -= food_y5 % 25
-
     food_cords = []
 
     for i in range(7):														# Generate food items
@@ -57,16 +37,28 @@ def showScreen():
         food_cords.append([food_x, food_y])
 
     pygame.init()                 # Initialize pygame
+
     display = (750, 500)
     # Set display wtih OpenGL
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     glOrtho(0, 750, 500, 0, -1, 1)
 
     radius = 25
-    x = 375
-    y = 350
+    x = 10
+    y = 450
 
     score = 0
+
+    font = pygame.font.Font('freesansbold.ttf', 40)
+
+    def drawText(x, y, text):
+        textSurface = font.render(
+            'Score :', True, (0, 255, 0, 0), (0, 0, 0, 0))
+        #textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
+        textData = pygame.image.tostring(textSurface, "RGBA", True)
+        glWindowPos2d(x, y)
+        glDrawPixels(textSurface.get_width(), textSurface.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData)
 
     status = True
     while status:
@@ -128,6 +120,7 @@ def showScreen():
         g = 150
         drawlines(second, g)
 
+        drawText(20, 430, "Score")
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
 
