@@ -1,4 +1,5 @@
 from OpenGL.GL import *
+import numpy as np
 
 # PACMAN CIRCLE
 
@@ -10,6 +11,16 @@ def drawCurve(radius, x, y, pos_x, pos_y):
     y = radius
     d = 5 - (4 * radius)
 
+    trasnlate = np.array([[1, 0, pos_x],
+                          [0, 1, pos_y],
+                          [0, 0, 1]])
+
+    v1 = np.array([[x1],  # center of circle
+                  [y1],
+                  [1]])
+
+    v11 = np.matmul(trasnlate, v1)  # translate center of circle
+
     while x < y:
 
         glColor3f(1.0, 1.0, 0.0)
@@ -17,12 +28,12 @@ def drawCurve(radius, x, y, pos_x, pos_y):
         glBegin(GL_POINTS)
 
         # glVertex2f(pos + x1 + y, pos + y1 + x)      #zone-1
-        glVertex2f(pos_x + x1 + x, pos_y + y1 + y)  # zone-2
-        glVertex2f(pos_x + x1 - x, pos_y + y1 + y)  # zone-3
-        glVertex2f(pos_x + x1 - y, pos_y + y1 + x)  # zone-4
-        glVertex2f(pos_x + x1 - y, pos_y + y1 - x)  # zone-5
-        glVertex2f(pos_x + x1 - x, pos_y + y1 - y)  # zone-6
-        glVertex2f(pos_x + x1 + x, pos_y + y1 - y)  # zone-7
+        glVertex2f(v11[0][0] + x1 + x, v11[1][0] + y1 + y)  # zone-2
+        glVertex2f(v11[0][0] + x1 - x, v11[1][0] + y1 + y)  # zone-3
+        glVertex2f(v11[0][0] + x1 - y, v11[1][0] + y1 + x)  # zone-4
+        glVertex2f(v11[0][0] + x1 - y, v11[1][0] + y1 - x)  # zone-5
+        glVertex2f(v11[0][0] + x1 - x, v11[1][0] + y1 - y)  # zone-6
+        glVertex2f(v11[0][0] + x1 + x, v11[1][0] + y1 - y)  # zone-7
         # glVertex2f(pos + x1 + y, pos + y1 - x)      #zone-8
 
         glEnd()
@@ -43,10 +54,10 @@ def drawCurve(radius, x, y, pos_x, pos_y):
 
     glBegin(GL_LINES)
 
-    glVertex2f(pos_x + x, pos_y + y)
-    glVertex2f(pos_x, pos_y)
+    glVertex2f(v11[0][0] + x, v11[1][0] + y)
+    glVertex2f(v11[0][0], v11[1][0])
 
-    glVertex2f(pos_x + x, pos_y + -y)
-    glVertex2f(pos_x, pos_y)
+    glVertex2f(v11[0][0] + x, v11[1][0] + -y)
+    glVertex2f(v11[0][0], v11[1][0])
 
     glEnd()

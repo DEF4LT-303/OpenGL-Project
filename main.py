@@ -27,39 +27,38 @@ def showScreen():
     # glLoadIdentity()
     # iterate()
 
-    food_x2 = random.randint(0, 700)
-    food_x2 -= food_x2 % 25
-    food_y2 = random.randint(0, 450)
-    food_y2 -= food_y2 % 25
+    food_cords = []
 
-    food_x3 = random.randint(0, 700)
-    food_x3 -= food_x3 % 25
-    food_y3 = random.randint(0, 450)
-    food_y3 -= food_y3 % 25
-
-    food_x4 = random.randint(0, 700)
-    food_x4 -= food_x4 % 25
-    food_y4 = random.randint(0, 450)
-    food_y4 -= food_y4 % 25
-
-    food_x5 = random.randint(0, 700)
-    food_x5 -= food_x5 % 25
-    food_y5 = random.randint(0, 450)
-    food_y5 -= food_y5 % 25
+    for i in range(7):														# Generate food items
+        food_x = random.randint(15, 680)
+        food_x -= food_x % 25
+        food_y = random.randint(15, 430)
+        food_y -= food_y % 25
+        food_cords.append([food_x, food_y])
 
     pygame.init()                 # Initialize pygame
+
     display = (750, 500)
     # Set display wtih OpenGL
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     glOrtho(0, 750, 500, 0, -1, 1)
 
     radius = 25
-    x = 375
-    y = 350
+    x = 10
+    y = 450
 
-    food_x1 = 400
-    food_y1 = 250
     score = 0
+
+    font = pygame.font.Font('freesansbold.ttf', 40)
+
+    def drawText(x, y, text):
+        textSurface = font.render(
+            'Score :', True, (0, 255, 0, 0), (0, 0, 0, 0))
+        #textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
+        textData = pygame.image.tostring(textSurface, "RGBA", True)
+        glWindowPos2d(x, y)
+        glDrawPixels(textSurface.get_width(), textSurface.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData)
 
     status = True
     while status:
@@ -84,59 +83,28 @@ def showScreen():
         if x > 750 - radius:            # Boundaries of the character movement
             x = 750 - radius
 
-        if x < 0 + radius:
-            x = 0 + radius
+        if x < 0 + radius+10:
+            x = 0 + radius+25
 
-        if y > 500 - radius:
-            y = 500 - radius
+        if y > 500 - radius-10:
+            y = 500 - radius-25
 
-        if y < 0 + radius:
-            y = 0 + radius
+        if y < 0 + radius+10:
+            y = 0 + radius+25
 
         obstacles()
 
-        food(food_x1, food_y1)
-        food(food_x2, food_y2)
-        food(food_x3, food_y3)
-        food(food_x4, food_y4)
-        food(food_x5, food_y5)
-
         drawCurve(radius, 0, 0, x, y)       # Draw the character
 
-        if x == food_x1 and y == food_y1:
-            print('hh')
-            food_x1 = 2000
-            food_y1 = 2000
-            food(food_x1, food_y1)
-            score += 1
-        elif x == food_x2 and y == food_y2:
-            print('hh1')
-            # food_x2 = 2000
-            # food_y2 = 2000
-            food_x2 = random.randint(0, 700)
-            food_x2 -= food_x2 % 25
-            food_y2 = random.randint(0, 450)
-            food_y2 -= food_y2 % 25
-            food(food_x2, food_y2)
-            score += 1
-        elif x == food_x3 and y == food_y3:
-            print('hh2')
-            food_x3 = 2000
-            food_y3 = 2000
-            food(food_x3, food_y3)
-            score += 1
-        elif x == food_x4 and y == food_y4:
-            print('hh3')
-            food_x4 = 2000
-            food_y4 = 2000
-            food(food_x4, food_y4)
-            score += 1
-        elif x == food_x5 and y == food_y5:
-            print('hh4')
-            food_x5 = 2000
-            food_y5 = 2000
-            food(food_x5, food_y5)
-            score += 1
+        for i in range(len(food_cords)):		# Draw the food items
+            food(food_cords[i][0], food_cords[i][1])
+
+        for i in range(len(food_cords)):		# Check if the character has eaten the food
+            if x == food_cords[i][0] and y == food_cords[i][1]:
+                food_cords[i][0] = 2000
+                food_cords[i][1] = 2000
+
+                score += 1
 
         if score < 10:                # Display the score
             id = "0" + str(score)
@@ -152,6 +120,7 @@ def showScreen():
         g = 150
         drawlines(second, g)
 
+        drawText(20, 430, "Score")
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
 
