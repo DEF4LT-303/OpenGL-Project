@@ -10,7 +10,7 @@ import random
 from circle import *
 from lines import *
 from food import *
-from obstacles import *
+from boundary import *
 from map import *
 from checkobstacle import *
 
