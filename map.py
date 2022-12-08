@@ -9,7 +9,7 @@ def draw_points(x, y, stat):
         glColor3f(1.0, 1.0, 0.0)
     else:
         glPointSize(4)
-        glColor3f(.5, .5, .5)
+        glColor3f(.0, .0, .5)
     glBegin(GL_POINTS)
     glVertex2f(.8, .8)
     glVertex2f(x, y)
