@@ -11,6 +11,8 @@ from circle import *
 from lines import *
 from food import *
 from obstacles import *
+from map import *
+from checkobstacle import *
 
 
 # def iterate():
@@ -45,15 +47,15 @@ def showScreen():
 
     radius = 25
     x = 10
-    y = 450
+    y = 0
 
     score = 0
 
-    font = pygame.font.Font('freesansbold.ttf', 40)
+    font = pygame.font.Font('freesansbold.ttf', 23)
 
     def drawText(x, y, text):
         textSurface = font.render(
-            'Score :', True, (0, 255, 0, 0), (0, 0, 0, 0))
+            'Score:', True, (0, 255, 0, 0), (0, 0, 0, 0))
         #textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
         textData = pygame.image.tostring(textSurface, "RGBA", True)
         glWindowPos2d(x, y)
@@ -120,7 +122,10 @@ def showScreen():
         g = 150
         drawlines(second, g)
 
-        drawText(20, 430, "Score")
+        drawlines_map()
+        x, y = check(x, y, radius)  # checking the obstacles
+
+        drawText(20, 50, "Score")
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
 
