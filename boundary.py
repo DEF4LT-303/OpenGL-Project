@@ -1,7 +1,7 @@
 from OpenGL.GL import *
 
 
-def obstacles():
+def boundary():
     x_max = 750
     y_max = 500
     min = 0

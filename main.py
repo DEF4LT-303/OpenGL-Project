@@ -10,7 +10,9 @@ import random
 from circle import *
 from lines import *
 from food import *
-from obstacles import *
+from boundary import *
+from map import *
+from checkobstacle import *
 
 
 # def iterate():
@@ -28,12 +30,28 @@ def showScreen():
     # iterate()
 
     food_cords = []
+    radius = 25
+    x = 10
+    y = 0
 
-    for i in range(7):														# Generate food items
-        food_x = random.randint(15, 680)
+    score = 0
+
+    for i in range(10):														# Generate food items
+
+        food_x = random.randint(51, 680)
         food_x -= food_x % 25
-        food_y = random.randint(15, 430)
+        food_y = random.randint(51, 400)
         food_y -= food_y % 25
+
+        flag = food_check(food_x, food_y, radius)
+
+        while flag:                               # Check if food is not generated on the obstacle
+            food_x = random.randint(15, 680)
+            food_x -= food_x % 25
+            food_y = random.randint(25, 400)
+            food_y -= food_y % 25
+            flag = food_check(food_x, food_y, radius)
+
         food_cords.append([food_x, food_y])
 
     pygame.init()                 # Initialize pygame
@@ -43,17 +61,20 @@ def showScreen():
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     glOrtho(0, 750, 500, 0, -1, 1)
 
-    radius = 25
-    x = 10
-    y = 450
-
-    score = 0
-
-    font = pygame.font.Font('freesansbold.ttf', 40)
+    font = pygame.font.Font('freesansbold.ttf', 23)
 
     def drawText(x, y, text):
         textSurface = font.render(
-            'Score :', True, (0, 255, 0, 0), (0, 0, 0, 0))
+            text, True, (0, 255, 0, 0), (0, 0, 0, 0))
+        # textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
+        textData = pygame.image.tostring(textSurface, "RGBA", True)
+        glWindowPos2d(x, y)
+        glDrawPixels(textSurface.get_width(), textSurface.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData)
+
+    def drawTextWin(x, y, text):
+        textSurface = font.render(
+            text, True, (0, 255, 0, 0), (0, 0, 0, 0))
         #textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
         textData = pygame.image.tostring(textSurface, "RGBA", True)
         glWindowPos2d(x, y)
@@ -92,7 +113,7 @@ def showScreen():
         if y < 0 + radius+10:
             y = 0 + radius+25
 
-        obstacles()
+        boundary()                         # Draw the  boundaries
 
         drawCurve(radius, 0, 0, x, y)       # Draw the character
 
@@ -120,7 +141,14 @@ def showScreen():
         g = 150
         drawlines(second, g)
 
-        drawText(20, 430, "Score")
+        drawlines_map()             # Draw the map
+        x, y = check(x, y, radius)  # checking the obstacles
+
+        drawText(20, 50, "Score:")
+
+        if score == len(food_cords):  # Check if the game is over
+            drawTextWin(20, 20, "Winner!")
+
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
 

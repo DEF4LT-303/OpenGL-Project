@@ -11,9 +11,10 @@ def draw_points(x, y):
                   [0, 0, 1]])
 
     # then we translate the points
-    ts = 800
-    trasnlate = np.array([[1, 0, ts],
-                          [0, 1, 0],
+    tx = 500
+    ty = 2000
+    trasnlate = np.array([[1, 0, tx],
+                          [0, 1, ty],
                           [0, 0, 1]])
 
     st = np.matmul(s, trasnlate)  # scale and translate
@@ -122,6 +123,7 @@ def mid_point_line(x1, y1, x2, y2):
 
 
 def drawlines(num, x):
+
     glColor3f(0, 1, 0)
 
     if num == 0:
