@@ -38,9 +38,9 @@ def showScreen():
 
     for i in range(10):														# Generate food items
 
-        food_x = random.randint(15, 680)
+        food_x = random.randint(51, 680)
         food_x -= food_x % 25
-        food_y = random.randint(25, 400)
+        food_y = random.randint(51, 400)
         food_y -= food_y % 25
 
         flag = food_check(food_x, food_y, radius)
@@ -65,7 +65,16 @@ def showScreen():
 
     def drawText(x, y, text):
         textSurface = font.render(
-            'Score:', True, (0, 255, 0, 0), (0, 0, 0, 0))
+            text, True, (0, 255, 0, 0), (0, 0, 0, 0))
+        # textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
+        textData = pygame.image.tostring(textSurface, "RGBA", True)
+        glWindowPos2d(x, y)
+        glDrawPixels(textSurface.get_width(), textSurface.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData)
+
+    def drawTextWin(x, y, text):
+        textSurface = font.render(
+            text, True, (0, 255, 0, 0), (0, 0, 0, 0))
         #textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
         textData = pygame.image.tostring(textSurface, "RGBA", True)
         glWindowPos2d(x, y)
@@ -135,7 +144,11 @@ def showScreen():
         drawlines_map()             # Draw the map
         x, y = check(x, y, radius)  # checking the obstacles
 
-        drawText(20, 50, "Score")
+        drawText(20, 50, "Score:")
+
+        if score == len(food_cords):  # Check if the game is over
+            drawTextWin(20, 20, "Winner!")
+
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
 
