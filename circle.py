@@ -7,7 +7,7 @@ from map import *
 def drawCurve(radius, pos_x, pos_y):
     x = 0
     y = radius
-    d = 5 - (4 * radius)
+    d = 1 - radius
 
     trasnlate = np.array([[1, 0, pos_x],
                           [0, 1, pos_y],
@@ -40,13 +40,13 @@ def drawCurve(radius, pos_x, pos_y):
 
             # choose east
 
-            d = d + ((16 * x) + 24)  # 8*((2*x)+3)
+            d = d + 2*x + 3
             x = x + 1
 
         else:
             # choosing south east
 
-            d = d + ((16 * x) - (16 * y) + 40)  # 8*((2*x)-(2*y)+5)
+            d = d + 2*x - 2*y + 5
             x = x + 1
             y = y - 1
 

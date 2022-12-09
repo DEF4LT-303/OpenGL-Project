@@ -3,11 +3,11 @@ def check(x, y, radius):
         x = 10
         y = 0
 
-    elif y == 150 and (x >= 275-radius and x <= 370+radius):  # second horizontal
+    elif y == 150 and (x >= 280-radius and x <= 370+radius):  # second horizontal
         x = 10
         y = 0
 
-    elif x == 275 and (y >= 180 and y <= 390+radius):  # third
+    elif x == 275 and (y >= 180-radius and y <= 390+radius):  # third
         x = 10
         y = 0
 

@@ -48,7 +48,7 @@ def showScreen():
         while flag:                               # Check if food is not generated on the obstacle
             food_x = random.randint(15, 680)
             food_x -= food_x % 25
-            food_y = random.randint(25, 400)
+            food_y = random.randint(50, 400)
             food_y -= food_y % 25
             flag = food_check(food_x, food_y, radius)
 
