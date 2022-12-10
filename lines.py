@@ -127,64 +127,64 @@ def drawlines(num, x):
     glColor3f(0, 1, 0)
 
     if num == 0:
-        mid_point_line(100 + x, 350, 210 + x, 350)
-        mid_point_line(100 + x, 150, 100 + x, 350)
-        mid_point_line(210 + x, 150, 210 + x, 350)
-        mid_point_line(100 + x, 150, 210 + x, 150)
+        mid_point_line(100+x,350,  210+x,350)
+        mid_point_line(100+x,150,  100+x,350)
+        mid_point_line(210+x,150,  210+x,350)
+        mid_point_line(100+x,150,  210+x,150)
 
     elif num == 1:
-        mid_point_line(210 + x, 150, 210 + x, 350)
+      mid_point_line(210+x,150,  210+x,350)
 
     elif num == 2:
-        mid_point_line(100 + x, 350, 200 + x, 350)
-        mid_point_line(100 + x, 250, 100 + x, 350)
-        mid_point_line(100 + x, 250, 200 + x, 250)
-        mid_point_line(200 + x, 150, 200 + x, 250)
-        mid_point_line(100 + x, 150, 200 + x, 150)
+      mid_point_line(100+x,350,  200+x,350)
+      mid_point_line(200+x,250,  200+x,350)
+      mid_point_line(100+x,250,  200+x,250)
+      mid_point_line(100+x,150,  100+x,250)
+      mid_point_line(100+x,150,  200+x,150)    
 
     elif num == 3:
-        mid_point_line(100 + x, 350, 200 + x, 350)
-        mid_point_line(200 + x, 250, 200 + x, 350)
-        mid_point_line(100 + x, 250, 200 + x, 250)
-        mid_point_line(200 + x, 150, 200 + x, 250)
-        mid_point_line(100 + x, 150, 200 + x, 150)
+      mid_point_line(100+x,350,  200+x,350)
+      mid_point_line(200+x,250,  200+x,350)
+      mid_point_line(100+x,250,  200+x,250)
+      mid_point_line(200+x,150,  200+x,250)
+      mid_point_line(100+x,150,  200+x,150)
 
     elif num == 4:
-        mid_point_line(100 + x, 150, 100 + x, 250)
-        mid_point_line(100 + x, 250, 200 + x, 250)
-        mid_point_line(200 + x, 250, 200 + x, 350)
-        mid_point_line(200 + x, 150, 200 + x, 250)
+      mid_point_line(100+x,250,  100+x,350)
+      mid_point_line(100+x,250,  200+x,250)
+      mid_point_line(200+x,250,  200+x,350)
+      mid_point_line(200+x,150,  200+x,250)
 
     elif num == 5:
-        mid_point_line(100 + x, 350, 200 + x, 350)
-        mid_point_line(200 + x, 250, 200 + x, 350)
-        mid_point_line(100 + x, 250, 200 + x, 250)
-        mid_point_line(100 + x, 150, 100 + x, 250)
-        mid_point_line(100 + x, 150, 200 + x, 150)
+      mid_point_line(100+x,350,  200+x,350)
+      mid_point_line(100+x,250,  100+x,350)
+      mid_point_line(100+x,250,  200+x,250)
+      mid_point_line(200+x,150,  200+x,250)
+      mid_point_line(100+x,150,  200+x,150)
 
     elif num == 6:
-        mid_point_line(100 + x, 350, 200 + x, 350)
-        mid_point_line(100 + x, 250, 100 + x, 350)
-        mid_point_line(100 + x, 250, 200 + x, 250)
-        mid_point_line(100 + x, 150, 100 + x, 250)
-        mid_point_line(200 + x, 250, 200 + x, 350)
-        mid_point_line(100 + x, 150, 200 + x, 150)
+      mid_point_line(100+x,350,  200+x,350)
+      mid_point_line(100+x,250,  100+x,350)
+      mid_point_line(100+x,250,  200+x,250)
+      mid_point_line(200+x,150,  200+x,250)
+      mid_point_line(100+x,150,  100+x,350)
+      mid_point_line(100+x,150,  200+x,150)
 
     elif num == 7:
-        mid_point_line(100 + x, 150, 210 + x, 150)
-        mid_point_line(210 + x, 150, 210 + x, 350)
-
+      mid_point_line(100+x,350,  210+x,350)
+      mid_point_line(210+x,150,  210+x,350)
+      
     elif num == 8:
-        mid_point_line(100 + x, 350, 210 + x, 350)
-        mid_point_line(100 + x, 150, 100 + x, 350)
-        mid_point_line(100 + x, 250, 210 + x, 250)
-        mid_point_line(210 + x, 150, 210 + x, 350)
-        mid_point_line(100 + x, 150, 210 + x, 150)
+      mid_point_line(100+x,350,  210+x,350)
+      mid_point_line(100+x,150,  100+x,350)
+      mid_point_line(100+x,250,  210+x, 250)
+      mid_point_line(210+x,150,  210+x,350)
+      mid_point_line(100+x,150,  210+x,150)
 
     else:
-        mid_point_line(100 + x, 350, 200 + x, 350)
-        mid_point_line(200 + x, 250, 200 + x, 350)
-        mid_point_line(100 + x, 250, 200 + x, 250)
-        mid_point_line(200 + x, 150, 200 + x, 250)
-        mid_point_line(100 + x, 150, 100 + x, 250)
-        mid_point_line(100 + x, 150, 200 + x, 150)
+      mid_point_line(100+x,350,  200+x,350)
+      mid_point_line(100+x,250,  100+x,350)
+      mid_point_line(100+x,250,  200+x,250)
+      mid_point_line(200+x,150,  200+x,250)
+      mid_point_line(200+x,250,  200+x,350)
+      mid_point_line(100+x,150,  200+x,150)

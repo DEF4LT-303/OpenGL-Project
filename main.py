@@ -46,9 +46,9 @@ def showScreen():
         flag = food_check(food_x, food_y, radius)
 
         while flag:                               # Check if food is not generated on the obstacle
-            food_x = random.randint(15, 680)
+            food_x = random.randint(50, 680)
             food_x -= food_x % 25
-            food_y = random.randint(25, 400)
+            food_y = random.randint(50, 400)
             food_y -= food_y % 25
             flag = food_check(food_x, food_y, radius)
 
@@ -59,7 +59,8 @@ def showScreen():
     display = (750, 500)
     # Set display wtih OpenGL
     pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
-    glOrtho(0, 750, 500, 0, -1, 1)
+    # glOrtho(0, 750, 500, 0, -1, 1)
+    glOrtho(0, 750, 0, 500, -1, 1)
 
     font = pygame.font.Font('freesansbold.ttf', 23)
 
@@ -95,9 +96,9 @@ def showScreen():
                 elif event.key == pygame.K_RIGHT:  # or event.key == ord('d'):
                     x += 25
                 elif event.key == pygame.K_UP:  # or event.key == ord('w'):
-                    y -= 25
-                elif event.key == pygame.K_DOWN:  # or event.key == ord('s'):
                     y += 25
+                elif event.key == pygame.K_DOWN:  # or event.key == ord('s'):
+                    y -= 25
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
@@ -115,7 +116,7 @@ def showScreen():
 
         boundary()                         # Draw the  boundaries
 
-        drawCurve(radius, 0, 0, x, y)       # Draw the character
+        drawCurve(radius, x, y)       # Draw the character
 
         for i in range(len(food_cords)):		# Draw the food items
             food(food_cords[i][0], food_cords[i][1])
@@ -144,10 +145,10 @@ def showScreen():
         drawlines_map()             # Draw the map
         x, y = check(x, y, radius)  # checking the obstacles
 
-        drawText(20, 50, "Score:")
+        drawText(20, 450, "Score:")
 
         if score == len(food_cords):  # Check if the game is over
-            drawTextWin(20, 20, "Winner!")
+            drawTextWin(20, 410, "Winner!")
 
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
