@@ -6,6 +6,7 @@ from pygame.locals import *
 import numpy as np
 import math
 import random
+import time
 
 from circle import *
 from lines import *
@@ -13,6 +14,7 @@ from food import *
 from boundary import *
 from map import *
 from checkobstacle import *
+from enemy import *
 
 
 # def iterate():
@@ -31,12 +33,12 @@ def showScreen():
 
     food_cords = []
     radius = 25
-    x = 10
-    y = 0
+    x = 300
+    y = 100
 
     score = 0
 
-    for i in range(10):														# Generate food items
+    for i in range(5):														# Generate food items
 
         food_x = random.randint(51, 680)
         food_x -= food_x % 25
@@ -83,6 +85,10 @@ def showScreen():
                      GL_RGBA, GL_UNSIGNED_BYTE, textData)
 
     status = True
+    pause = False
+    tx = 0
+    ty = 0
+    flag = 0
     while status:
         for event in pygame.event.get():
 
@@ -115,7 +121,14 @@ def showScreen():
             y = 0 + radius+25
 
         boundary()                         # Draw the  boundaries
+        # enemy()
+        enemy_translate(tx, ty)
 
+        i, j = enemy_path()
+        tx += i
+        ty += j
+
+        x, y = enemy_check(x, y, radius)
         drawCurve(radius, x, y)       # Draw the character
 
         for i in range(len(food_cords)):		# Draw the food items
@@ -149,6 +162,14 @@ def showScreen():
 
         if score == len(food_cords):  # Check if the game is over
             drawTextWin(20, 410, "Winner!")
+            # pause = True
+
+        while pause:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        pause = False
+                        status = False
 
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
