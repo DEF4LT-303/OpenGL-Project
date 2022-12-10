@@ -36,9 +36,14 @@ def showScreen():
     x = 300
     y = 100
 
+    print(food_cords)
+
     score = 0
 
-    for i in range(5):														# Generate food items
+    ult_food_x = 375                              # Generate ultimate food item
+    ult_food_y = 250
+
+    for i in range(10):														# Generate food items
 
         food_x = random.randint(51, 680)
         food_x -= food_x % 25
@@ -48,6 +53,7 @@ def showScreen():
         flag = food_check(food_x, food_y, radius)
 
         while flag:                               # Check if food is not generated on the obstacle
+
             food_x = random.randint(50, 680)
             food_x -= food_x % 25
             food_y = random.randint(50, 400)
@@ -134,12 +140,19 @@ def showScreen():
         for i in range(len(food_cords)):		# Draw the food items
             food(food_cords[i][0], food_cords[i][1])
 
+        ultimate_food(ult_food_x, ult_food_y)
+
         for i in range(len(food_cords)):		# Check if the character has eaten the food
             if x == food_cords[i][0] and y == food_cords[i][1]:
                 food_cords[i][0] = 2000
                 food_cords[i][1] = 2000
 
                 score += 1
+
+            if x == ult_food_x and y == ult_food_y:		# Check if the character has eaten the ultimate food
+                ult_food_x = 2000
+                ult_food_y = 2000
+                score += 10
 
         if score < 10:                # Display the score
             id = "0" + str(score)
@@ -160,7 +173,7 @@ def showScreen():
 
         drawText(20, 450, "Score:")
 
-        if score == len(food_cords):  # Check if the game is over
+        if score == len(food_cords)+10:  # Check if the game is over
             drawTextWin(20, 410, "Winner!")
             # pause = True
 

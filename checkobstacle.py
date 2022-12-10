@@ -29,6 +29,9 @@ def check(x, y, radius):
 def food_check(x, y, radius):
 
     flag = False
+    if x < 500 and x > 280 and y < 400 and y > 150:
+        flag = True
+
     if (x == 150 and y <= 250+radius):  # firstbound
         flag = True
 
