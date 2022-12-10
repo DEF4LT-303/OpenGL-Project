@@ -53,21 +53,6 @@ def enemy_path():
 
     x = 0
     y = 0
-    # if enemy_cords[0][0] == 450 and enemy_cords[0][1] >= 160:
-    #     x = 0
-    #     y = -10
-
-    # elif enemy_cords[0][0] < 450 and enemy_cords[0][1] == 330:
-    #     x = 10
-    #     y = 0
-
-    # elif enemy_cords[0][0] == 280 and enemy_cords[0][1] <= 330:
-    #     x = 0
-    #     y = 10
-
-    # elif enemy_cords[0][0] >= 280 and enemy_cords[0][1] <= 160:
-    #     x = -10
-    #     y = 0
     if enemy_cords[0][0] == 450 and enemy_cords[0][1] >= 160:
         x = 0
         y = -25
@@ -91,16 +76,9 @@ def enemy_path():
 
 def enemy_check(x, y, radius):
 
-    # flag = 0
-    # for i in range(len(enemy_cords)):
-    #     if ((x - enemy_cords[i][0])**2 + (y - enemy_cords[i][1])**2) <= radius**2:
-    #         flag = 1
-    #         break
-
     if y == enemy_cords[0][1] and (x >= enemy_cords[0][0] and x <= enemy_cords[3][0]):  # down
         x = 300
         y = 100
-        print("down")
 
     # left
     elif x == enemy_cords[1][0] and (y >= enemy_cords[0][1] and y <= enemy_cords[1][1]):
@@ -110,6 +88,7 @@ def enemy_check(x, y, radius):
     elif y == enemy_cords[1][1] and (x >= enemy_cords[1][0] and x <= enemy_cords[2][0]):  # up
         x = 300
         y = 100
+
     # right
     elif x == enemy_cords[2][0] and (y >= enemy_cords[2][1] and y <= enemy_cords[3][1]):
         x = 300
