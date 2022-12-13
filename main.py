@@ -33,8 +33,8 @@ def showScreen():
 
     food_cords = []
     radius = 25
-    x = 300
-    y = 100
+    x = 10
+    y = 75
 
     print(food_cords)
 
@@ -89,6 +89,30 @@ def showScreen():
         glWindowPos2d(x, y)
         glDrawPixels(textSurface.get_width(), textSurface.get_height(),
                      GL_RGBA, GL_UNSIGNED_BYTE, textData)
+
+    def drawTextEnd():
+        textSurface = font.render(
+            "Winner!", True, (0, 255, 0, 0), (0, 0, 0, 0))
+        #textSurface = font.render(text, True, (255, 255, 255, 255), (255, 255, 255, 255))
+        textData = pygame.image.tostring(textSurface, "RGBA", True)
+        glWindowPos2d(20, 410)
+        glDrawPixels(textSurface.get_width(), textSurface.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData)
+
+    def drawMapText():  # start and goal text
+        textSurface1 = font.render(
+            'START', True, (255, 255, 255, 255), (0, 0, 0, 0))
+        textData1 = pygame.image.tostring(textSurface1, "RGBA", True)
+        glWindowPos2d(10, 20)
+        glDrawPixels(textSurface1.get_width(), textSurface1.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData1)
+
+        textSurface2 = font.render(
+            'EXIT', True, (255, 255, 255, 255), (0, 0, 0, 0))
+        textData2 = pygame.image.tostring(textSurface2, "RGBA", True)
+        glWindowPos2d(680, 370)
+        glDrawPixels(textSurface2.get_width(), textSurface2.get_height(),
+                     GL_RGBA, GL_UNSIGNED_BYTE, textData2)
 
     status = True
     pause = False
@@ -174,15 +198,13 @@ def showScreen():
         drawText(20, 450, "Score:")
 
         if score == len(food_cords)+10:  # Check if the game is over
-            drawTextWin(20, 410, "Winner!")
+            drawTextWin(310, 410, "Go to Exit!")
             # pause = True
 
-        while pause:
-            for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
-                        pause = False
-                        status = False
+        drawMapText()
+
+        if x >= 700 and x <= 725 and y == 375:
+            drawTextEnd()
 
         pygame.display.flip()  # Update the full display Surface to the screen
         pygame.time.wait(10)  # pause the program for an amount of time
