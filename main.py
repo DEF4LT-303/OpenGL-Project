@@ -1,3 +1,5 @@
+### Please install pygame (pip install pygame) before runnung ###
+
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
@@ -17,19 +19,7 @@ from checkobstacle import *
 from enemy import *
 
 
-# def iterate():
-#     glViewport(0, 0, 750, 750)
-#     glMatrixMode(GL_PROJECTION)
-#     glLoadIdentity()
-#     glOrtho(0.0, 750, 0.0, 750, 0.0, 1.0)
-#     glMatrixMode(GL_MODELVIEW)
-#     glLoadIdentity()
-
-
 def showScreen():
-    # glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    # glLoadIdentity()
-    # iterate()
 
     food_cords = []
     radius = 25
